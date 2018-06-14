@@ -4,49 +4,25 @@
   margin: auto;
 }
 
-input{
-  box-shadow: 1px 1px 10px #465;
-}
-button{
-  box-shadow: 1px 1px 10px #465;
-}
 
-body{
-  background-color: #8bd;
+form{
+  display: flex;
+  width: 30%;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 }
 
-h3{
-  font-family: sans-serif;
-  text-align: center;
-}
-
-h2{
-  font-family: sans-serif;
-  text-align: center;
-}
-
-.map{
+form>button{
   box-shadow: 1px 1px 10px #465;
-  align-items: center;
-  justify-content: center;
-  flex-flow: row, wrap;
-  width: 98%;
-  height: 80%;
+}
+form>input{
+  box-shadow: 1px 1px 10px #465;
   margin: 5px;
-}
-.maps{
-  align-items: center;
-  justify-content: center;
-  margin: auto;
-  width: 100%;
-  height: 800px;
 }
 
 button{
 	padding:4px 5px 4px 5px;
-	font:bold 12px Arial;
+	font:bold 11px Arial;
 	background:#f5f5f5;
 	color:#555;
 	border-radius:2px;
@@ -60,18 +36,61 @@ button:hover {
 }
 
 
+body{
+  background-color: #8bd;
+  align-items: center;
+  justify-content: center;
+}
+
+h3{
+  font-family: 'Roboto', sans-serif;
+  text-align: left;
+}
+
+h2{
+  font-family: 'Fira Sans', sans-serif;
+  text-align: center;
+}
+
+h4{
+  font-family: 'Roboto', sans-serif;
+  font-size: 12px;
+  text-align: center;
+}
+
+.map{
+  box-shadow: 1px 1px 10px #465;
+  align-items: center;
+  justify-content: center;
+  flex-flow: row, wrap;
+  width: 98%;
+  height: 80%;
+  margin-left: 5px;
+  margin-right: 5px;
+
+}
+.maps{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 600px;
+}
+
+
+
 @media (min-width: 1000px) {
   .half {
-    align-items: center;
-    justify-content: center;
+    display: flex;
+    flex-flow: column wrap;
+    align-items: flex-start;
+    justify-content: flex-start;
     width: 48%;
-    height: 600px;
+    height: 700px;
     float:left;
   }
 }
 @media (max-width: 1000px) {
   .half {
-    align-items: center;
     justify-content: center;
     padding: 0 5px;
     width: 95%;

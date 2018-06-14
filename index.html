@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://openlayers.org/en/v4.6.5/css/ol.css" type="text/css">
     <link rel="stylesheet" href="twomaps.css"  type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans|Roboto:400i" rel="stylesheet">
     <!-- The line below is only needed for old environments like Internet Explorer and Android 4.x -->
     <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
     <script src="https://openlayers.org/en/v4.6.5/build/ol.js"></script>
@@ -29,13 +30,15 @@
 
   <div class="maps">
     <div class="half">
-      <h3>elasticsearch</h3>
+      <h3>Résultats bruts d'elasticsearch</h3>
       <div id="canvasMap" class="map"></div>
+        <h4>Nombre de résultats : ###</h4>
     </div>
 
     <div class="half">
-      <h3>elasticsearch with request analysis</h3>
+      <h3>Résultats d'elasticsearch avec analyse de requête</h3>
       <div id="canvasMap2" class="map"></div>
+        <h4>Nombre de résultats : ###</h4>
     </div>
   </div>
 
