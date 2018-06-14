@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Two Maps</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://openlayers.org/en/v4.6.5/css/ol.css" type="text/css">
+    <link rel="stylesheet" href="twomaps.css"  type="text/css">
+    <!-- The line below is only needed for old environments like Internet Explorer and Android 4.x -->
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
+    <script src="https://openlayers.org/en/v4.6.5/build/ol.js"></script>
+    <script src="js/elasticsearch.js"> </script>
+    <script src="js/require.js"> </script>
+    <script src="js/jQuery.js"> </script>
+
+  </head>
+  <body>
+
+<h2>Comparaison des requêtes elasticsearch et elasticsearch avec analyse de requête préalable</h2>
+
+  <form class="rechercher" action="index.html" method="post">
+    <input id="inp" type="text" size="40px" name="Rechercher" value="">
+    <button id="rechercher" type="button" name="button">Rechercher</button>
+    <button id="rechercher" type="button" name="button" onclick="refreshLayer()">Actualiser les données</button>
+
+  </form>
+
+
+
+
+  <div class="maps">
+    <div class="half">
+      <h3>elasticsearch</h3>
+      <div id="canvasMap" class="map"></div>
+    </div>
+
+    <div class="half">
+      <h3>elasticsearch with request analysis</h3>
+      <div id="canvasMap2" class="map"></div>
+    </div>
+  </div>
+
+
+
+    <script>
+
+      var layer = new ol.layer.Tile({
+        source: new ol.source.OSM()
+      });
+
+      var view = new ol.View({
+        center: [-16720000, -2000000],
+        zoom: 7
+      });
+
+      var vectorSource1 = new ol.source.Vector({
+       url:'res1.geojson',
+       format: new ol.format.GeoJSON()
+     });
+
+     var vectorLayer1 = new ol.layer.Vector({
+       source: vectorSource1
+     });
+
+      var map1 = new ol.Map({
+        target: 'canvasMap',
+        layers: [layer,vectorLayer1],
+        view: view
+      });
+
+      var vectorSource2 = new ol.source.Vector({
+       url:'res2.geojson',
+       format: new ol.format.GeoJSON()
+     });
+
+     var vectorLayer2 = new ol.layer.Vector({
+       source: vectorSource2
+     });
+
+
+      var map2 = new ol.Map({
+        format: new ol.format.GeoJSON(),
+
+        url: 'res2.geojson',
+        target: 'canvasMap2',
+        layers: [layer,vectorLayer2],
+        view: view
+      });
+
+      function refreshLayer()
+      {
+          var selectedLayerSource1 = vectorLayer1.getSource();
+          var selectedLayerSource2 = vectorLayer2.getSource();
+
+          if(selectedLayerSource1 instanceof ol.source.Vector)
+          {
+              //do vector reload
+              selectedLayerSource1.clear();
+              selectedLayerSource2.clear();
+              map1.updateSize();
+              map2.updateSize();
+          }
+          else
+          {
+              //reload the entire page
+              window.location.reload();
+          }
+      }
+
+      /*
+      function init(){
+
+      var elasticsearch = require('elasticsearch');
+      var client = new elasticsearch.Client({
+        host: 'localhost:9200',
+        log: 'trace'
+      });
+      }
+
+      init();
+      */
+    </script>
+  </body>
+</html>
