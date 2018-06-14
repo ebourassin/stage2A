@@ -7,15 +7,15 @@
 
 form{
   display: flex;
-  width: 30%;
+  width: auto;
   align-items: center;
-  justify-content: space-between;
+  margin-left: 5px;
+  margin-right: 5px;
+  justify-content: center;
+  border: solid 1px;
 }
 
-form>button{
-  box-shadow: 1px 1px 10px #465;
-}
-form>input{
+form>button, form>input{
   box-shadow: 1px 1px 10px #465;
   margin: 5px;
 }
@@ -42,18 +42,18 @@ body{
   justify-content: center;
 }
 
-h3{
-  font-family: 'Roboto', sans-serif;
-  text-align: left;
-}
-
 h2{
   font-family: 'Fira Sans', sans-serif;
   text-align: center;
 }
 
-h4{
+h3{
   font-family: 'Roboto', sans-serif;
+  text-align: left;
+}
+
+h4{
+  font-family: 'Fira Sans', sans-serif;
   font-size: 12px;
   text-align: center;
 }

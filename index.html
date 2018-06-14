@@ -55,6 +55,7 @@
         zoom: 7
       });
 
+      // CARTE 1
       var vectorSource1 = new ol.source.Vector({
        url:'res1.geojson',
        format: new ol.format.GeoJSON()
@@ -70,6 +71,8 @@
         view: view
       });
 
+
+      // CARTE 2
       var vectorSource2 = new ol.source.Vector({
        url:'res2.geojson',
        format: new ol.format.GeoJSON()
@@ -79,7 +82,6 @@
        source: vectorSource2
      });
 
-
       var map2 = new ol.Map({
         format: new ol.format.GeoJSON(),
 
@@ -88,6 +90,14 @@
         layers: [layer,vectorLayer2],
         view: view
       });
+
+      var countRes1 = Object.keys(vectorSource1).length;
+      console.log("res 1");
+      console.log(countRes1);
+
+      var countRes2 = Object.keys(vectorSource2).length;
+      console.log("res 2");
+      console.log(countRes2);
 
       function refreshLayer()
       {
@@ -108,6 +118,8 @@
               window.location.reload();
           }
       }
+
+
 
       /*
       function init(){
