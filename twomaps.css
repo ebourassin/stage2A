@@ -3,7 +3,11 @@
   align-items: center;
   margin: auto;
 }
-
+input{
+  text-align: right;
+  font-style: italic;
+  color: #333;
+}
 
 form{
   display: flex;
@@ -70,6 +74,15 @@ h3{
   margin-left: 5px;
   margin-top: 5px
 }
+
+#terme_rech{
+  font-family: 'Fira Sans', sans-serif;
+  font-size: 16px;
+  text-align: center;
+  margin-left: 5px;
+  margin-top: 5px
+}
+
 
 .map{
   box-shadow: 1px 1px 10px #465;

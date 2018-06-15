@@ -12,21 +12,24 @@
     <script src="js/elasticsearch.js"> </script>
     <!-- The line below is only needed for old environments like Internet Explorer and Android 4.x -->
     <script src="https://openlayers.org/en/v4.6.5/examples/resources/mapbox-streets-v6-style.js"></script>
-    <script src="js/require.js"> </script>
+    <!-- <script src="js/require.js"> </script> -->
     <script src="js/jQuery.js"> </script>
+    <script src="js/flotr2.js"> </script>
   </head>
 
   <body>
 
   <header>
-    <h2>Comparaison des requêtes elasticsearch et elasticsearch avec analyse de requête préalable</h2>
+    <h2>Comparaison des requêtes elasticsearch sans et avec analyse de requête préalable</h2>
   </header>
 
   <form class="rechercher" action="index.html" method="post">
     <input id="inp" type="text" size="40px" name="Rechercher" value="">
-    <button id="rechercher" type="button" name="button">Rechercher</button>
+    <button id="rechercher" type="button" name="button" onclick="request()">Rechercher</button>
     <button id="rechercher" type="button" name="button" onclick="refreshLayer()">Actualiser les données</button>
   </form>
+
+  <div id="terme_rech"></div>
 
     <div class="maps">
       <div class="half">
@@ -35,6 +38,7 @@
         <div class="stats">
           <div id="stat1"> Nombre de résultats :</div>
           <div id="tps1">Temps d'exécution :</div>
+          <div id="editor-render-0"> </div>
 
         </div>
       </div>
@@ -44,7 +48,7 @@
         <div class="stats">
           <div id="stat2"> Nombre de résultats :</div>
           <div id="tps2">Temps d'exécution :</div>
-
+          <div id="editor-render-0"> </div>
         </div>
       </div>
     </div>
@@ -103,8 +107,7 @@
       document.getElementById('stat2').innerHTML = 'Nombre de résultats : '+countRes2;
       }
 
-      function refreshLayer()
-      {
+      function refreshLayer(){
           refreshNbRes()
           var selectedLayerSource1 = vectorLayer1.getSource();
           var selectedLayerSource2 = vectorLayer2.getSource();
@@ -124,8 +127,22 @@
           }
       }
 
+      function request() {
+        var req = document.getElementById("inp").value;
+        document.getElementById("terme_rech").innerHTML = 'Requête : '+req;
+        var requestURL = 'http://localhost:9200/_search?q='+req;
+        var request = new XMLHttpRequest();
+        request.open('GET', requestURL);
+        request.responseType = 'json';
+        console.log(request.response);
+        console.log(request.response["hits"]);
+
+        refreshLayer();
+      }
+
+      /*
       function UserAction() {
-        var req = document.getElementById('inp').value
+        var req = document.getElementById('inp').value;
         var articlesElt = document.getElementById("articles");
         ajaxGet("http://localhost:9200//_search?q="+req, function (reponse) {
             console.console.log(req);
@@ -144,6 +161,7 @@
       }
 
       UserAction()
+      */
 
       /*
       function init(){
