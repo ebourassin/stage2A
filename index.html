@@ -26,6 +26,7 @@
   <form class="rechercher" action="index.html" method="post">
     <input id="inp" type="text" size="40px" name="Rechercher" value="">
     <button id="rechercher" type="button" name="button" onclick="request()">Rechercher</button>
+    <input id="nbr" type="number" step="1" value="10" min="1" max="250">
     <button id="rechercher" type="button" name="button" onclick="refreshLayer()">Actualiser les données</button>
   </form>
 
@@ -102,7 +103,7 @@
 
       function refreshNbRes(){
 
-        var json = '{"req": "Arue", "nb1": 50, "nb2": 167, "time1": "0.237013 s", "time2": "1.470084 s"}'
+        var json = '{"req": "Moruroa", "nb1": 50, "nb2": 4, "time1": "0.490028 s", "time2": "0.293016 s"}'
 
         obj = JSON.parse(json);
         var nbRes1 = obj.nb1;
@@ -142,8 +143,9 @@
 
       function request() {
         var req = document.getElementById("inp").value;
+        var nbr = document.getElementById("nbr").value;
         document.getElementById("terme_rech").innerHTML = 'Requête : '+req;
-        var requestURL = 'http://localhost:9200/_search?q='+req;
+        var requestURL = 'http://localhost:9200/_search?q='+req+'&limit='+nbr;
         var request = new XMLHttpRequest();
         request.open('GET', requestURL);
         request.responseType = 'json';

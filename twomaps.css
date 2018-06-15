@@ -3,10 +3,16 @@
   align-items: center;
   margin: auto;
 }
-input{
+#inp{
   text-align: right;
   font-style: italic;
   color: #333;
+}
+
+#nbr{
+  text-align: center;
+  color: #333;
+  width: 4em;
 }
 
 form{
