@@ -37,7 +37,7 @@
         <div id="canvasMap1" class="map"></div>
         <div class="stats">
           <div id="stat1"> Nombre de résultats :</div>
-          <div id="tps1">Temps d'exécution :</div>
+          <div id="tps1">Durée d'exécution :</div>
           <div id="editor-render-0"> </div>
 
         </div>
@@ -47,7 +47,7 @@
         <div id="canvasMap2" class="map"></div>
         <div class="stats">
           <div id="stat2"> Nombre de résultats :</div>
-          <div id="tps2">Temps d'exécution :</div>
+          <div id="tps2"> Durée d'exécution :</div>
           <div id="editor-render-0"> </div>
         </div>
       </div>
@@ -101,10 +101,22 @@
       });
 
       function refreshNbRes(){
-      var countRes1 = _.size(Object.keys(vectorSource1));
-      document.getElementById('stat1').innerHTML = 'Nombre de résultats : '+countRes1;
-      var countRes2 = _.size(Object.keys(vectorSource2));
-      document.getElementById('stat2').innerHTML = 'Nombre de résultats : '+countRes2;
+
+        var json = '{"nb1": 5, "nb2": 4, "time1": "0.174010 s", "time2": "0.075004 s"}'
+        obj = JSON.parse(json);
+        var nbRes1 = obj.nb1;
+        var nbRes2 = obj.nb2;
+        var t1 = obj.time1;
+        var t2 = obj.time2;
+
+        console.log(obj.result);
+
+        document.getElementById('stat1').innerHTML = 'Nombre de résultats : '+nbRes1;
+        document.getElementById('stat2').innerHTML = 'Nombre de résultats : '+nbRes2;
+        document.getElementById('tps1').innerHTML = 'Durée d\'exécution : '+t1;
+        document.getElementById('tps2').innerHTML = 'Durée d\'exécution : '+t2;
+
+
       }
 
       function refreshLayer(){
@@ -136,7 +148,6 @@
         request.responseType = 'json';
         console.log(request.response);
         console.log(request.response["hits"]);
-
         refreshLayer();
       }
 
