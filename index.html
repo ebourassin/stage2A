@@ -10,46 +10,46 @@
     <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
     <script src="https://openlayers.org/en/v4.6.5/build/ol.js"></script>
     <script src="js/elasticsearch.js"> </script>
+    <!-- The line below is only needed for old environments like Internet Explorer and Android 4.x -->
+    <script src="https://openlayers.org/en/v4.6.5/examples/resources/mapbox-streets-v6-style.js"></script>
     <script src="js/require.js"> </script>
     <script src="js/jQuery.js"> </script>
 
+
   </head>
   <body>
-
-<h2>Comparaison des requêtes elasticsearch et elasticsearch avec analyse de requête préalable</h2>
+<header>
+  <h2>Comparaison des requêtes elasticsearch et elasticsearch avec analyse de requête préalable</h2>
+</header>
 
   <form class="rechercher" action="index.html" method="post">
     <input id="inp" type="text" size="40px" name="Rechercher" value="">
     <button id="rechercher" type="button" name="button">Rechercher</button>
     <button id="rechercher" type="button" name="button" onclick="refreshLayer()">Actualiser les données</button>
-
   </form>
 
-
-
-
-  <div class="maps">
-    <div class="half">
-      <h3>Résultats bruts d'elasticsearch</h3>
-      <div id="canvasMap" class="map"></div>
-        <h4>Nombre de résultats : ###</h4>
+    <div class="maps">
+      <div class="half">
+        <h3>Résultats bruts d'elasticsearch</h3>
+        <div id="canvasMap" class="map"></div>
+          <h4>Nombre de résultats : ###</h4>
+      </div>
+      <div class="half">
+        <h3>Résultats d'elasticsearch avec analyse de requête</h3>
+        <div id="canvasMap2" class="map"></div>
+          <h4>Nombre de résultats : ###</h4>
+      </div>
     </div>
-
-    <div class="half">
-      <h3>Résultats d'elasticsearch avec analyse de requête</h3>
-      <div id="canvasMap2" class="map"></div>
-        <h4>Nombre de résultats : ###</h4>
-    </div>
-  </div>
-
 
 
     <script>
 
-      var layer = new ol.layer.Tile({
-        source: new ol.source.OSM()
-      });
 
+      var layer = new ol.layer.Tile({
+        source: new ol.source.XYZ({
+          url: 'https://api.mapbox.com/styles/v1/mapbox/outdoors-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYXd3ZXVuYWwiLCJhIjoiMTEzYmJhMWRkNWVkZmUwYjIzMzVjZTVkODlmZjgwNzQifQ.ST5Rw84FYObE52-Be52KAg'
+        })
+      });
       var view = new ol.View({
         center: [-16720000, -2000000],
         zoom: 7
@@ -59,43 +59,37 @@
       var vectorSource1 = new ol.source.Vector({
        url:'res1.geojson',
        format: new ol.format.GeoJSON()
-     });
-
-     var vectorLayer1 = new ol.layer.Vector({
+      });
+      var vectorLayer1 = new ol.layer.Vector({
        source: vectorSource1
      });
-
       var map1 = new ol.Map({
         target: 'canvasMap',
         layers: [layer,vectorLayer1],
         view: view
       });
 
+      var countRes1 = _.size(Object.keys(vectorSource1));
+      console.log("res 1");
+      console.log(countRes1);
 
       // CARTE 2
       var vectorSource2 = new ol.source.Vector({
        url:'res2.geojson',
        format: new ol.format.GeoJSON()
-     });
-
-     var vectorLayer2 = new ol.layer.Vector({
-       source: vectorSource2
-     });
-
+      });
+      var vectorLayer2 = new ol.layer.Vector({
+        source: vectorSource2
+      });
       var map2 = new ol.Map({
         format: new ol.format.GeoJSON(),
-
         url: 'res2.geojson',
         target: 'canvasMap2',
         layers: [layer,vectorLayer2],
         view: view
       });
 
-      var countRes1 = Object.keys(vectorSource1).length;
-      console.log("res 1");
-      console.log(countRes1);
-
-      var countRes2 = Object.keys(vectorSource2).length;
+      var countRes2 = _.size(Object.keys(vectorSource2));
       console.log("res 2");
       console.log(countRes2);
 
@@ -119,7 +113,26 @@
           }
       }
 
+      function UserAction() {
+        var req = document.getElementById('inp').value
+        var articlesElt = document.getElementById("articles");
+        ajaxGet("http://localhost:9200//_search?q="+req, function (reponse) {
+            console.console.log(req);
+            // Transforme la réponse en un tableau d'articles
+            var articles = JSON.parse(reponse);
+            articles.forEach(function (article) {
+                // Ajout du titre et du contenu de chaque article
+                var titreElt = document.createElement("h2");
+                titreElt.textContent = article.titre;
+                var contenuElt = document.createElement("p");
+                contenuElt.textContent = article.contenu;
+                articlesElt.appendChild(titreElt);
+                articlesElt.appendChild(contenuElt);
+            });
+        });
+      }
 
+      UserAction()
 
       /*
       function init(){

@@ -34,16 +34,28 @@ button:hover {
   cursor: pointer;
 }
 
-
-body{
-  background-color: #8bd;
+html, body {
+  margin:0;
+  padding:0;
+  background-color: #dad8d4;
   align-items: center;
   justify-content: center;
+}
+
+header{
+  background-color: #75d0f1;
+  margin: 0;
+  padding: 1px;
+  margin-top: 0px;
+  margin-bottom: 20px;
+  box-shadow: 1px 1px 10px #465;
 }
 
 h2{
   font-family: 'Fira Sans', sans-serif;
   text-align: center;
+  font-size: 24px;
+  color: #112;
 }
 
 h3{
