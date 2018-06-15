@@ -14,13 +14,13 @@
     <script src="https://openlayers.org/en/v4.6.5/examples/resources/mapbox-streets-v6-style.js"></script>
     <script src="js/require.js"> </script>
     <script src="js/jQuery.js"> </script>
-
-
   </head>
+
   <body>
-<header>
-  <h2>Comparaison des requêtes elasticsearch et elasticsearch avec analyse de requête préalable</h2>
-</header>
+
+  <header>
+    <h2>Comparaison des requêtes elasticsearch et elasticsearch avec analyse de requête préalable</h2>
+  </header>
 
   <form class="rechercher" action="index.html" method="post">
     <input id="inp" type="text" size="40px" name="Rechercher" value="">
@@ -34,6 +34,8 @@
         <div id="canvasMap1" class="map"></div>
         <div class="stats">
           <div id="stat1"> Nombre de résultats :</div>
+          <div id="tps1">Temps d'exécution :</div>
+
         </div>
       </div>
       <div class="half">
@@ -41,6 +43,8 @@
         <div id="canvasMap2" class="map"></div>
         <div class="stats">
           <div id="stat2"> Nombre de résultats :</div>
+          <div id="tps2">Temps d'exécution :</div>
+
         </div>
       </div>
     </div>
@@ -73,10 +77,7 @@
         view: view
       });
 
-      var countRes1 = _.size(Object.keys(vectorSource1));
-      console.log("res 1");
-      console.log(countRes1);
-      document.getElementById('stat1').innerHTML = 'Nombre de résultats : '+countRes1;
+
 
 
       // CARTE 2
@@ -95,13 +96,16 @@
         view: view
       });
 
+      function refreshNbRes(){
+      var countRes1 = _.size(Object.keys(vectorSource1));
+      document.getElementById('stat1').innerHTML = 'Nombre de résultats : '+countRes1;
       var countRes2 = _.size(Object.keys(vectorSource2));
-      console.log("res 2");
-      console.log(countRes2);
       document.getElementById('stat2').innerHTML = 'Nombre de résultats : '+countRes2;
+      }
 
       function refreshLayer()
       {
+          refreshNbRes()
           var selectedLayerSource1 = vectorLayer1.getSource();
           var selectedLayerSource2 = vectorLayer2.getSource();
 
