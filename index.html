@@ -31,13 +31,17 @@
     <div class="maps">
       <div class="half">
         <h3>Résultats bruts d'elasticsearch</h3>
-        <div id="canvasMap" class="map"></div>
-          <h4>Nombre de résultats : ###</h4>
+        <div id="canvasMap1" class="map"></div>
+        <div class="stats">
+          <div id="stat1"> Nombre de résultats :</div>
+        </div>
       </div>
       <div class="half">
         <h3>Résultats d'elasticsearch avec analyse de requête</h3>
         <div id="canvasMap2" class="map"></div>
-          <h4>Nombre de résultats : ###</h4>
+        <div class="stats">
+          <div id="stat2"> Nombre de résultats :</div>
+        </div>
       </div>
     </div>
 
@@ -64,7 +68,7 @@
        source: vectorSource1
      });
       var map1 = new ol.Map({
-        target: 'canvasMap',
+        target: 'canvasMap1',
         layers: [layer,vectorLayer1],
         view: view
       });
@@ -72,6 +76,8 @@
       var countRes1 = _.size(Object.keys(vectorSource1));
       console.log("res 1");
       console.log(countRes1);
+      document.getElementById('stat1').innerHTML = 'Nombre de résultats : '+countRes1;
+
 
       // CARTE 2
       var vectorSource2 = new ol.source.Vector({
@@ -92,6 +98,7 @@
       var countRes2 = _.size(Object.keys(vectorSource2));
       console.log("res 2");
       console.log(countRes2);
+      document.getElementById('stat2').innerHTML = 'Nombre de résultats : '+countRes2;
 
       function refreshLayer()
       {

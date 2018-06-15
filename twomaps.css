@@ -63,10 +63,12 @@ h3{
   text-align: left;
 }
 
-h4{
+.stats{
   font-family: 'Fira Sans', sans-serif;
-  font-size: 12px;
+  font-size: 16px;
   text-align: center;
+  margin-left: 5px;
+  margin-top: 5px
 }
 
 .map{
