@@ -1,1 +1,1 @@
-{"req": "mont aorai", "nb1": 50, "nb2": 2, "time1": "0.177010 s", "time2": "0.025001 s"}
+{"req": "parc", "nb1": 50, "src1": ["sau_pga_zonage", "cadastre_cadastre_parcelle", "sjs_recensementequipementsportif", "cadastre_bienspublics_pays"], "nb2": 0, "src2": [], "time1": "0.701040 s", "time2": "0.051003 s"}

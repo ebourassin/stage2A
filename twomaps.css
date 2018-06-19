@@ -1,11 +1,14 @@
 .rechercher{
-  width: 40%;
+  width: 80%;
+  display: flex;
+  flex-flow: row wrap;
   align-items: center;
   margin: auto;
 }
 #inp{
   text-align: right;
   font-style: italic;
+  width: 400px;
   color: #333;
 }
 
@@ -62,9 +65,11 @@ header{
 }
 
 h2{
-  font-family: 'Fira Sans', sans-serif;
-  text-align: center;
-  font-size: 24px;
+  font-family: 'Zilla Slab', serif;
+  font-weight: 700;
+  text-align: left;
+  margin-left: 1em;
+  font-size: 28px;
   color: #112;
 }
 
@@ -74,6 +79,8 @@ h3{
 }
 
 .stats{
+  display: flex;
+  flex-flow: column wrap;
   font-family: 'Fira Sans', sans-serif;
   font-size: 16px;
   text-align: left;
@@ -96,13 +103,14 @@ h3{
   justify-content: center;
   flex-flow: row, wrap;
   width: 98%;
-  height: 75%;
+  height: 400px;
   margin-left: 5px;
   margin-right: 5px;
 
 }
 .maps{
   display: flex;
+  flex-flow: row wrap;
   justify-content: center;
   width: 100%;
   height: 600px;
@@ -110,22 +118,28 @@ h3{
 
 
 
-@media (min-width: 1000px) {
+@media (min-width: 800px) {
   .half {
     display: flex;
-    flex-flow: column wrap;
+    flex-flow: column;
     align-items: flex-start;
     justify-content: flex-start;
     width: 48%;
-    height: 600px;
+    height: auto;
     float:left;
   }
 }
-@media (max-width: 1000px) {
+@media (max-width: 800px) {
+
   .half {
+    display: flex;
+    flex-flow: column;
     justify-content: center;
     padding: 0 5px;
     width: 95%;
     float: left;
+  }
+  .map{
+    height: 200px;
   }
 }

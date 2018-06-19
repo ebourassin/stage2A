@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="https://openlayers.org/en/v4.6.5/css/ol.css" type="text/css">
     <link rel="stylesheet" href="twomaps.css"  type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Fira+Sans|Roboto:400i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Zilla+Slab" rel="stylesheet">
+
     <!-- The line below is only needed for old environments like Internet Explorer and Android 4.x -->
     <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
     <script src="https://openlayers.org/en/v4.6.5/build/ol.js"></script>
@@ -23,7 +25,7 @@
   </header>
 
   <form class="rechercher" action="index.html" method="post">
-    <input id="inp" type="text" size="40px" name="Rechercher" value="">
+    <input id="inp" type="text"  name="Rechercher" value="">
     <button id="rechercher" type="button" name="button" onclick="request()">Rechercher</button>
     <input id="nbr" type="number" step="1" value="10" min="1" max="250">
     <button id="rechercher" type="button" name="button" onclick="refreshLayer()">Actualiser les données</button>
@@ -37,18 +39,19 @@
         <div id="canvasMap1" class="map"></div>
         <div class="stats">
           <div id="stat1"> Nombre de résultats :</div>
-          <div id="tps1">Durée d'exécution :</div>
-          <div id="editor-render-0"> </div>
-
+          <div id="tps1"> Durée d'exécution :</div>
+          <ul id="li1"></ul>
         </div>
       </div>
+
       <div class="half">
         <h3>Résultats d'elasticsearch avec analyse de requête</h3>
         <div id="canvasMap2" class="map"></div>
         <div class="stats">
           <div id="stat2"> Nombre de résultats :</div>
           <div id="tps2"> Durée d'exécution :</div>
-          <div id="editor-render-0"> </div>
+          <ul id="li2"></ul>
+
         </div>
       </div>
     </div>
@@ -100,10 +103,10 @@
         view: view
       });
 
-      function loadJSON(callback) {
+      function loadJSON(file, callback) {
         var xobj = new XMLHttpRequest();
             xobj.overrideMimeType("application/json");
-        xobj.open('GET', 'stats.json', true); // Replace 'my_data' with the path to your file, false=synchronous
+        xobj.open('GET', file, true); // Replace 'my_data' with the path to your file, false=synchronous
         xobj.onreadystatechange = function () {
               if (xobj.readyState == 4 && xobj.status == "200") {
                 // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
@@ -116,7 +119,7 @@
 
       function refreshNbRes(){
         //'{"req": "Moruroa", "nb1": 50, "nb2": 4, "time1": "0.490028 s", "time2": "0.293016 s"}'
-        loadJSON(function(response) {
+        loadJSON('stats.json', function(response) {
           // Parse JSON string into object
           var actual_JSON = JSON.parse(response);
           //obj = JSON.parse(json);
@@ -125,11 +128,34 @@
           var t1 = actual_JSON.time1;
           var t2 = actual_JSON.time2;
           var req = actual_JSON.req;
-          console.log(actual_JSON);
+          var src1 = actual_JSON.src1;
+          var src2 = actual_JSON.src2;
+          console.log(src1);
+          console.log(src2);
           document.getElementById('stat1').innerHTML = 'Nombre de résultats : '+nbRes1;
           document.getElementById('stat2').innerHTML = 'Nombre de résultats : '+nbRes2;
           document.getElementById('tps1').innerHTML = 'Durée d\'exécution : '+t1;
           document.getElementById('tps2').innerHTML = 'Durée d\'exécution : '+t2;
+          document.getElementById('inp').innerHTML = ''+req;
+
+          document.getElementById('li1').innerHTML = '';
+          var li1 = document.getElementById('li1');
+          for (el in src1) {
+            var newLi = document.createElement("li");
+            newLi.id = src1[el]+'_1';
+            li1.appendChild(newLi);
+            document.getElementById(src1[el]+'_1').innerHTML = src1[el];
+          }
+
+          document.getElementById('li2').innerHTML = '';
+          var li2 = document.getElementById('li2');
+          for (el in src2) {
+            var newLi = document.createElement("li");
+            newLi.id = src2[el]+'_2';
+            li2.appendChild(newLi);
+            document.getElementById(src2[el]+'_2').innerHTML = src2[el];
+          }
+
         });
       }
 
@@ -155,16 +181,23 @@
       function request() {
         var req = document.getElementById("inp").value;
         var nbr = document.getElementById("nbr").value;
-        document.getElementById("terme_rech").innerHTML = 'Requête : '+req;
-        var requestURL = 'http://localhost:9200/_search?q='+req+'&limit='+nbr;
-        var request = new XMLHttpRequest();
-        request.open('GET', requestURL);
-        request.responseType = 'json';
-        console.log(request.response);
-        console.log(request.response["hits"]);
+        //document.getElementById("terme_rech").innerHTML = 'Requête : '+req;
+        var requestURL = 'http://localhost:9200/_search?q='+req+'&size='+nbr+'&callback=?';
+        document.getElementById("terme_rech").innerHTML = 'Requête : '+requestURL;
+        loadJSON(requestURL, function(response) {
+          // Parse JSON string into object
+          var request = JSON.parse(response);
+          //obj = JSON.parse(json);
+          //var request = new XMLHttpRequest();
+          request.open('GET', requestURL);
+          request.responseType = 'json';
+          console.log(request.response);
+
+        });
         refreshLayer();
       }
 
+      refreshLayer()
       /*
       function UserAction() {
         var req = document.getElementById('inp').value;
