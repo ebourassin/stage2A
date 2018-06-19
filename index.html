@@ -54,6 +54,11 @@
 
         </div>
       </div>
+
+      <div class="half">
+        <h3>Te Fenua</h3>
+        <iframe  class="map" src="https://www.tefenua.gov.pf/tefenua/?center=-149.462464%2C-17.535905&zoom=14&layers=fond%2Ccadastre&buttons=actualites%2Cconnexion%2Ccouches%2Ccredits%2Cdessin%2Cenvoi-erreur%2Cenvoi-toponyme%2Ciframe%2Citineraire%2Cpartage%2Cposition%2Cpreferences" width="530" height="400"></iframe>
+      </div>
     </div>
 
 
@@ -88,16 +93,17 @@
 
 
       // CARTE 2
+
       var vectorSource2 = new ol.source.Vector({
        url:'res2.geojson',
        format: new ol.format.GeoJSON()
       });
+
       var vectorLayer2 = new ol.layer.Vector({
         source: vectorSource2
       });
+
       var map2 = new ol.Map({
-        format: new ol.format.GeoJSON(),
-        url: 'res2.geojson',
         target: 'canvasMap2',
         layers: [layer,vectorLayer2],
         view: view
@@ -182,7 +188,7 @@
         var req = document.getElementById("inp").value;
         var nbr = document.getElementById("nbr").value;
         //document.getElementById("terme_rech").innerHTML = 'Requête : '+req;
-        var requestURL = 'http://localhost:9200/_search?q='+req+'&size='+nbr+'&callback=?';
+        var requestURL = 'http://localhost:9200/_search?q='+req+'&size='+nbr;
         document.getElementById("terme_rech").innerHTML = 'Requête : '+requestURL;
         loadJSON(requestURL, function(response) {
           // Parse JSON string into object
@@ -194,6 +200,8 @@
           console.log(request.response);
 
         });
+
+
         refreshLayer();
       }
 

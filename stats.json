@@ -1,1 +1,1 @@
-{"req": "parc", "nb1": 50, "src1": ["sau_pga_zonage", "cadastre_cadastre_parcelle", "sjs_recensementequipementsportif", "cadastre_bienspublics_pays"], "nb2": 0, "src2": [], "time1": "0.701040 s", "time2": "0.051003 s"}
+{"req": "y45", "nb1": 3, "src1": ["cadastre_cadastre_parcelle", "cadastre_bienspublics_communes"], "nb2": 2, "src2": ["cadastre_cadastre_parcelle"], "time1": "0.145009 s", "time2": "0.034002 s"}
