@@ -1,1 +1,1 @@
-{"req": "y45", "nb1": 3, "src1": ["cadastre_cadastre_parcelle", "cadastre_bienspublics_communes"], "nb2": 2, "src2": ["cadastre_cadastre_parcelle"], "time1": "0.145009 s", "time2": "0.034002 s"}
+{"req": "w4*", "nb1": 50, "src1": ["cadastre_cadastre_parcelle"], "nb2": 50, "src2": ["cadastre_cadastre_parcelle"], "time1": "0.215013 s", "time2": "0.107006 s"}
