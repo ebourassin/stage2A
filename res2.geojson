@@ -4,52 +4,22 @@
         "type": "MultiPoint",
         "coordinates": [
             [
-                -149.49498717263,
-                -17.613147741405
+                -149.378712629038,
+                -17.5763033876802
             ]
         ]
     },
     "properties": {
-        "f1": 39,
-        "f2": 5756,
-        "f3": 0,
-        "f4": "Mont Aorai",
+        "f1": 175,
+        "f2": 4419,
+        "f3": 453,
+        "f4": "Montagne Mouaoue",
         "f5": "MONT",
-        "f6": "2011-01-26",
+        "f6": "2004-09-20",
         "f7": "TAHITI",
-        "f8": "PIRAE",
-        "f9": "Emmanuel BOUNIOT",
-        "f10": "2066 m",
-        "f11": "Carte SHOM"
-    }
-},
-{
-    "type": "Feature",
-    "geometry": {
-        "type": "Point",
-        "coordinates": [
-            -149.495043744387,
-            -17.6132716603146
-        ]
-    },
-    "properties": {
-        "f1": 84,
-        "f2": 256,
-        "f3": "THT-N",
-        "f4": "2011-12-08T00:00:00",
-        "f5": 1,
-        "f6": "Photogramm\u00e9trie PVA",
-        "f7": 1,
-        "f8": "Interne (SAU)",
-        "f9": 1,
-        "f10": "VALIDE",
-        "f11": "Aorai",
-        "f12": 1,
-        "f13": "1: 50 000",
-        "f14": 6,
-        "f15": "Sommet",
-        "f16": null,
-        "f17": "2001-01-01",
-        "f18": "2017-10-14"
+        "f8": "HITIAA O TE RA",
+        "f9": "Jeanne FOURNIER",
+        "f10": null,
+        "f11": "Carte SHOM 6605"
     }
 }]}

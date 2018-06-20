@@ -156,7 +156,7 @@
           var inp_el = document.getElementById('inp');
           inp_el.value = req;
           console.log('----------------------- ---');
-          document.getElementById('terme_rech').innerHTML = 'Terme recherché : '+req;
+          //document.getElementById('terme_rech').innerHTML = 'Terme recherché : '+req;
 
           document.getElementById('li1').innerHTML = '';
           var li1 = document.getElementById('li1');
@@ -181,7 +181,6 @@
 
       function refreshLayer(){
           refreshNbRes()
-          getInfoFromTF()
           var selectedLayerSource1 = vectorLayer1.getSource();
           var selectedLayerSource2 = vectorLayer2.getSource();
           if(selectedLayerSource1 instanceof ol.source.Vector)
