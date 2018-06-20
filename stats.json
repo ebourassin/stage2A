@@ -1,1 +1,1 @@
-{"req": "w4*", "nb1": 50, "src1": ["cadastre_cadastre_parcelle"], "nb2": 50, "src2": ["cadastre_cadastre_parcelle"], "time1": "0.215013 s", "time2": "0.107006 s"}
+{"req": "mont aorai", "nb1": 50, "src1": ["cadastre_cadastre_parcelle", "si_route_troncons_sld", "si_route_troncons", "cadastre_bienspublics_pays", "sau_topo_bati_batispecifique", "si_toponyme"], "nb2": 2, "src2": ["si_toponyme", "sau_topo_toponyme_oronyme"], "time1": "0.440025 s", "time2": "0.028001 s"}

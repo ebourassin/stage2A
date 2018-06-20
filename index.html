@@ -34,6 +34,16 @@
   <div id="terme_rech"></div>
 
     <div class="maps">
+
+      <div class="half">
+        <h3>Te Fenua</h3>
+        <iframe id="tf" class="map" src="https://www.tefenua.gov.pf/tefenua/?center=-149.478888%2C-17.530016&zoom=6&layers=fond&buttons=couches" width="530" height="400"></iframe>
+        <div class="stats">
+          <div id="stat0"> Statistiques impossibles à récupérer pour cause de "SecurityError: Permission denied to access property "document" on cross-origin object"</div>
+          <ul id="li0"></ul>
+        </div>
+      </div>
+
       <div class="half">
         <h3>Résultats bruts d'elasticsearch</h3>
         <div id="canvasMap1" class="map"></div>
@@ -55,10 +65,7 @@
         </div>
       </div>
 
-      <div class="half">
-        <h3>Te Fenua</h3>
-        <iframe  class="map" src="https://www.tefenua.gov.pf/tefenua/?center=-149.462464%2C-17.535905&zoom=6&layers=fond&buttons=couches" width="530" height="400"></iframe>
-      </div>
+
     </div>
 
 
@@ -122,6 +129,29 @@
         xobj.send(null);
       }
 
+      function getInfoFromTF(req){
+        //var input_tf = document.getElementById("tf").contentWindow.document.getElementById("search-field");
+        //input_tf.value = req;
+        //console.log(input_tf);
+
+        var iframe = document.getElementById('tf');
+        var innerDoc = (iframe.contentDocument) ? iframe.contentDocument : iframe.contentWindow.document;
+
+        var ulObj = innerDoc.getElementById("search-field");
+
+        var lst_types = ['resultats-toponymes','resultats-batiment','resultats-parcelles','resultats-adresses','resultats-esm','resultats-sites-administratifs','resultats-sites-sante'];
+        lst_types.forEach(function(el){
+          console.log(innerDoc.getElementById(el));
+          console.log('yyy');
+        });
+
+
+        var nbRes = 0;
+        var element = document.getElementsByClassName('results-parcelles');
+        console.log('-----');
+        console.log(element);
+        console.log('- - -');
+      }
 
       function refreshNbRes(){
         //'{"req": "Moruroa", "nb1": 50, "nb2": 4, "time1": "0.490028 s", "time2": "0.293016 s"}'
@@ -134,6 +164,9 @@
           var t1 = actual_JSON.time1;
           var t2 = actual_JSON.time2;
           var req = actual_JSON.req;
+
+          getInfoFromTF(req);
+
           var src1 = actual_JSON.src1;
           var src2 = actual_JSON.src2;
           console.log(src1);
@@ -142,7 +175,12 @@
           document.getElementById('stat2').innerHTML = 'Nombre de résultats : '+nbRes2;
           document.getElementById('tps1').innerHTML = 'Durée d\'exécution : '+t1;
           document.getElementById('tps2').innerHTML = 'Durée d\'exécution : '+t2;
-          document.getElementById('inp').innerHTML = ''+req;
+
+          console.log('----------------------- ---');
+          var inp_el = document.getElementById('inp');
+          inp_el.value = req;
+          console.log('----------------------- ---');
+          document.getElementById('terme_rech').innerHTML = 'Terme recherché : '+req;
 
           document.getElementById('li1').innerHTML = '';
           var li1 = document.getElementById('li1');
@@ -167,6 +205,7 @@
 
       function refreshLayer(){
           refreshNbRes()
+          getInfoFromTF()
           var selectedLayerSource1 = vectorLayer1.getSource();
           var selectedLayerSource2 = vectorLayer2.getSource();
           if(selectedLayerSource1 instanceof ol.source.Vector)
