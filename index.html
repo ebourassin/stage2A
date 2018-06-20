@@ -129,29 +129,6 @@
         xobj.send(null);
       }
 
-      function getInfoFromTF(req){
-        //var input_tf = document.getElementById("tf").contentWindow.document.getElementById("search-field");
-        //input_tf.value = req;
-        //console.log(input_tf);
-
-        var iframe = document.getElementById('tf');
-        var innerDoc = (iframe.contentDocument) ? iframe.contentDocument : iframe.contentWindow.document;
-
-        var ulObj = innerDoc.getElementById("search-field");
-
-        var lst_types = ['resultats-toponymes','resultats-batiment','resultats-parcelles','resultats-adresses','resultats-esm','resultats-sites-administratifs','resultats-sites-sante'];
-        lst_types.forEach(function(el){
-          console.log(innerDoc.getElementById(el));
-          console.log('yyy');
-        });
-
-
-        var nbRes = 0;
-        var element = document.getElementsByClassName('results-parcelles');
-        console.log('-----');
-        console.log(element);
-        console.log('- - -');
-      }
 
       function refreshNbRes(){
         //'{"req": "Moruroa", "nb1": 50, "nb2": 4, "time1": "0.490028 s", "time2": "0.293016 s"}'
@@ -165,7 +142,6 @@
           var t2 = actual_JSON.time2;
           var req = actual_JSON.req;
 
-          getInfoFromTF(req);
 
           var src1 = actual_JSON.src1;
           var src2 = actual_JSON.src2;
