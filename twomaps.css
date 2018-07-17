@@ -143,3 +143,12 @@ h3{
     height: 200px;
   }
 }
+
+.ol-scale-line-inner{
+  font-family: "Fira Sans", sans-serif;
+  color: #FFF;
+  font-size: 10px;
+}
+.ol-attribution.ol-unselectable.ol-control.ol-uncollapsible{
+  visibility: hidden;
+}
